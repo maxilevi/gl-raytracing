@@ -1,2 +1,4 @@
 Debug/
 .vs/
+.idea/
+cmake-build-debug/
