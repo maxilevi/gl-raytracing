@@ -27,7 +27,7 @@ int main(void)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(640, 480, "Test Window", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(640, 480, "Raytracing Demo", NULL, NULL);
 	if (!window)
 	{
 		fprintf(stderr, "Failed to open GLFW window.\n");

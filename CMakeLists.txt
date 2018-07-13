@@ -69,7 +69,7 @@ file(GLOB SRC_FILES
 )
 
 # Add executable to build.
-add_executable(${PROJECT_NAME} ${SRC_FILES} wrappers/Shader.h wrappers/Shader.cpp Renderer.cpp Renderer.h IO.cpp IO.h)
+add_executable(${PROJECT_NAME} ${SRC_FILES} rendering/Shader.h rendering/Shader.cpp rendering/Renderer.cpp rendering/Renderer.h IO.cpp IO.h rendering/ScreenOverlay.cpp rendering/ScreenOverlay.h rendering/VBO.cpp rendering/VBO.h rendering/VAO.cpp rendering/VAO.h)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/glew32.dll DESTINATION ${CMAKE_BINARY_DIR})
 
 if(MSVC)
