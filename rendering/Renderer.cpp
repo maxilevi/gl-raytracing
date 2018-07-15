@@ -3,3 +3,16 @@
  */
 
 #include "Renderer.h"
+
+Renderer::Renderer()
+{
+}
+
+void Renderer::Draw(const Shader* Shader, const VAO* VertexArray)
+{
+    Shader->Bind();
+    VertexArray->Bind();
+    VertexArray->Draw();
+    VertexArray->Unbind();
+    Shader->Unbind();
+}

@@ -4,10 +4,11 @@
 
 #include "VBO.h"
 
-VBO::VBO(T* data, int size)
+template< class T >
+VBO::VBO(T* data, GLsizeiptr size)
 {
     glGenBuffers(1, &this->_id);
-    glBufferData(this->_target, sizeof(data) * 3, data, this->_usage);
+    glBufferData(this->_target, size, data, this->_usage);
 };
 
 VBO::~VBO()
@@ -15,7 +16,7 @@ VBO::~VBO()
     glDeleteBuffers(1, &this->_id);
 }
 
-void VBO::Use()
+const void VBO::Use()
 {
     glBindBuffer(this->_target, this->_id);
 };

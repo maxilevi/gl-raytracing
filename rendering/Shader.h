@@ -15,9 +15,10 @@ private:
     Shader();
 
 public:
-    static Shader Build(std::string const& vertex_shader, std::string const& fragment_shader);
-    const void operator[](std::string uniform_name) const;
-    void Use();
+    static const Shader& Build(std::string const& vertex_shader, std::string const& fragment_shader);
+    void operator[](std::string uniform_name) const;
+    void Bind() const;
+    void Unbind() const;
     ~Shader();
 };
 

@@ -14,9 +14,9 @@ private:
     GLenum _target;
     GLenum _usage;
 public:
-    VBO(T* data, int size);
+    VBO(T* data, GLsizeiptr size);
     ~VBO();
-    void Use();
+    const void Use();
 };
 
 

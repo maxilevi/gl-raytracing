@@ -9,16 +9,11 @@ Shader::Shader()
 
 };
 
-static Shader Shader::Build(std::string const& vertex_shader, std::string const& fragment_shader) {
+static const Shader& Shader::Build(std::string const& vertex_shader, std::string const& fragment_shader) {
     return Shader();
 };
 
-void operator[](std::string const& uniform_name)
-{
-
-}
-
-void Shader::Use()
+void Shader::Bind() const
 {
     glUseProgram(this->_id);
 };
@@ -28,7 +23,7 @@ Shader::~Shader()
     glDeleteProgram(this->_id);
 }
 
-const void Shader::operator[](std::string uniform_name) const
+void Shader::operator[](std::string uniform_name) const
 {
     return;
 };

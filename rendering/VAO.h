@@ -6,8 +6,18 @@
 #define GLRAYTRACING_VAO_H
 
 
+#include <GL/glew.h>
+
 class VAO {
 
+private:
+    GLuint _id;
+public:
+    VAO();
+    ~VAO();
+    void Bind() const;
+    void Unbind() const;
+    void Draw() const;
 };
 
 
