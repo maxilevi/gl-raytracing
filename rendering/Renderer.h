@@ -10,10 +10,12 @@
 
 class Renderer {
 private:
-    Renderer();
-
+    Shader* _mainShader;
+    VAO* _mainVAO;
+    void DrawObject(const Shader* Shader, const VAO* VertexArray);
 public:
-    static void Draw(const Shader* Shader, const VAO* VertexArray);
+    Renderer();
+    void Draw();
 };
 
 

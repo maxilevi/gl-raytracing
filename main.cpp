@@ -3,6 +3,9 @@
 #include <GLFW/glfw3.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "rendering/VBO.h"
+#include "rendering/Shader.h"
+#include "rendering/Renderer.h"
 
 static void error_callback(int error, const char* description)
 {
@@ -45,10 +48,11 @@ int main(void)
 		return -1;
 	}
 
+	Renderer* renderer = new Renderer();
     while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
-
+		renderer->Draw();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
