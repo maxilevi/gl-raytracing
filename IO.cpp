@@ -11,7 +11,7 @@ IO::IO(){
 
 };
 
-const std::string IO::ReadString(std::string path)
+const std::string* IO::ReadString(std::string path)
 {
     std::ifstream in(path);
     if(in) {
