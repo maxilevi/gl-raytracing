@@ -10,9 +10,9 @@ Renderer::Renderer()
     const std::string* vertexShader = IO::ReadString("Shaders/default.vert");
     const std::string* fragmentShader = IO::ReadString("Shaders/default.frag");
     this->_mainShader = Shader::Build(vertexShader, fragmentShader);
-    GLfloat vertices[] = {1.0f,1.0f, -1.0f,1.0f, -1.0f,-1.0f, 1.0f,-1.0f, 1.0f,1.0f, -1.0f,-1.0f};
-    VBO<GLfloat>* vertexBuffer = new VBO<GLfloat>(vertices, 12 * sizeof(GLfloat));
-    this->_mainVAO = new VAO<GLfloat>(vertexBuffer);
+    GLfloat vertices[] = {0f,0f, .5f,1f, 1f,0f};//{1.0f,1.0f, -1.0f,1.0f, -1.0f,-1.0f, 1.0f,-1.0f, 1.0f,1.0f, -1.0f,-1.0f};
+    VBO<GLfloat>* vertexBuffer = new VBO<GLfloat>(vertices, 6 * sizeof(GLfloat), 1, GL_FLOAT);//12 * sizeof(GLfloat));
+    this->_mainVAO = new VAO(&vertexBuffer, 1);
 }
 
 void Renderer::Draw()
