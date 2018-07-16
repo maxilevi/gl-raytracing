@@ -16,6 +16,7 @@ private:
 public:
     Renderer();
     void Draw();
+    ~Renderer();
 };
 
 

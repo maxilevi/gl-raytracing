@@ -28,3 +28,9 @@ void Renderer::DrawObject(const Shader* Shader, const VAO* VertexArray)
     VertexArray->Unbind();
     Shader->Unbind();
 }
+
+Renderer::~Renderer()
+{
+    delete this->_mainVAO;
+    delete this->_mainShader;
+}

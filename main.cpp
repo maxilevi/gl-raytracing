@@ -56,7 +56,7 @@ int main(void)
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
+	delete renderer;
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	exit(EXIT_SUCCESS);

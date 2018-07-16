@@ -32,6 +32,7 @@ static GLuint Shader::CompileShader(const std::string* source, GLenum type)
     if(compilation_result != -1) {
         std::cout << log << std::endl;
     }
+    delete[] p;
 }
 
 static GLuint Shader::CreateProgram(GLuint vertex_shader_id, GLuint fragment_shader_id)
