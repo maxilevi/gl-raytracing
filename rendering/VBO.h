@@ -11,15 +11,20 @@
 template<class T> class VBO{
 private:
     GLuint _id;
-    GLsizeiptr _size;
+    GLint _size;
+    GLsizeiptr _sizeInBytes;
     GLenum _target;
     GLenum _hint;
-    void Initialize(T* data, GLsizeiptr size, GLenum target, GLenum hint);
+    GLenum _pointerType;
+    void Initialize(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type, GLenum target, GLenum hint);
 public:
-    VBO(T* data, GLsizeiptr size);
-    VBO(T* data, GLsizeiptr size, GLenum target, GLenum hint);
+    VBO(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type);
+    VBO(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type, GLenum target, GLenum hint);
     ~VBO();
-    const void Use();
+    GLenum getPointerType();
+    GLint getSize();
+    const void Bind();
+    const void Unbind();
 };
 
 
