@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <iostream>
 
 IO::IO(){
 
@@ -18,7 +19,9 @@ const std::string* IO::ReadString(std::string path)
         std::ostringstream contents;
         contents << in.rdbuf();
         in.close();
-        return contents.str();
+        std::string* str = new std::string(contents.str());
+        return str;
     }
-    throw std::io_errc("could not open file stream");
+    std::cerr << "could not open file stream";
+    return nullptr;
 };
