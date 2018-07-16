@@ -4,12 +4,29 @@
 
 #include "VBO.h"
 
-template< class T >
+template <class T>
+VBO::VBO(T* data, GLsizeiptr size, GLenum target, GLenum hint)
+{
+    this->Initialize(data, size, target, hint);
+};
+
+template <class T>
 VBO::VBO(T* data, GLsizeiptr size)
 {
-    glGenBuffers(1, &this->_id);
-    glBufferData(this->_target, size, data, this->_usage);
+    this->Initialize(data, size, GL_ARRAY_BUFFER, GL_STATIC_DRAW);
 };
+
+template <class T>
+void VBO::Initialize(T* data, GLsizeiptr size, GLenum target, GLenum hint)
+{
+    this->_hint = hint;
+    this->_target = target;
+    this->_size = size;
+
+    glGenBuffers(1, &this->_id);
+    glBufferData(this->_target, this->_size, data, this->_hint);
+};
+
 
 VBO::~VBO()
 {
