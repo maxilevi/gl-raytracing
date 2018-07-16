@@ -5,13 +5,16 @@
 #include "Shader.h"
 #include "iostream"
 
-Shader::Shader()
+Shader::Shader(GLuint id)
 {
-
+    this->_id = id;
 };
 
-static Shader* Shader::Build(const std::string* vertex_shader, const std::string* fragment_shader) {
-    return new Shader();
+static Shader* Shader::Build(const std::string* vertex_shader, const std::string* fragment_shader)
+{
+    GLuint vertex_id = Shader::CompileShader(vertex_shader, GL_VERTEX_SHADER);
+    GLuint fragment_id = Shader::CompileShader(fragment_shader, GL_FRAGMENT_SHADER);
+    return new Shader(Shader::CreateProgram(vertex_id, fragment_id));
 };
 
 static GLuint Shader::CompileShader(const std::string* source, GLenum type)
@@ -33,7 +36,15 @@ static GLuint Shader::CompileShader(const std::string* source, GLenum type)
 
 static GLuint Shader::CreateProgram(GLuint vertex_shader_id, GLuint fragment_shader_id)
 {
-
+    GLuint programId = glCreateProgram();
+    glAttachShader(programId, vertex_shader_id);
+    glAttachShader(programId, fragment_shader_id);
+    glLinkProgram(programId);
+    glDetachShader(programId, vertex_shader_id);
+    glDetachShader(programId, fragment_shader_id);
+    glDeleteShader(vertex_shader_id);
+    glDeleteShader(fragment_shader_id);
+    return programId;
 }
 
 void Shader::Bind() const
@@ -50,8 +61,3 @@ Shader::~Shader()
 {
     glDeleteProgram(this->_id);
 }
-
-void Shader::operator[](std::string uniform_name) const
-{
-    return;
-};
