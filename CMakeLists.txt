@@ -11,10 +11,6 @@ set(OUTPUT_RELEASE Release/bin)
 # Folders files
 set(CPP_DIR_1 ./)
 
-############## CMake Project ################
-#        The main options of project        #
-#############################################
-
 project(${PROJECT_NAME} CXX)
 
 # Define Release by default.
@@ -31,10 +27,6 @@ add_definitions(
    -D_UNICODE
 )
 
-############## Artefacts Output #################
-# Defines outputs , depending Debug or Release. #
-#################################################
-
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
   set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
@@ -44,10 +36,6 @@ else()
   set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
   set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
 endif()
-
-################# Flags ################
-# Defines Flags for Windows and Linux. #
-########################################
 
 if(MSVC)
    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /W3 /MD /Od /Zi /EHsc")
@@ -60,14 +48,10 @@ if(NOT MSVC)
    endif()
 endif(NOT MSVC)
 
-################ Files ################
-#   --   Add files to project.   --   #
-#######################################
 
 file(GLOB SRC_FILES
     ${CPP_DIR_1}/*.cpp
 )
-
 # Add executable to build.
 add_executable(${PROJECT_NAME} ${SRC_FILES} rendering/Shader.h rendering/Shader.cpp rendering/Renderer.cpp rendering/Renderer.h IO.cpp IO.h rendering/VBO.cpp rendering/VBO.h rendering/VAO.cpp rendering/VAO.h)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/glew32.dll DESTINATION ${CMAKE_BINARY_DIR})
