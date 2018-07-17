@@ -14,19 +14,37 @@ class VAO {
 protected:
     GLuint _id;
     int _count;
-    VBO** _buffers;
+    VAO();
 public:
-    VAO(VBO** buffers, int count);
-    ~VAO();
     void Bind() const;
     void Unbind() const;
     void Draw() const;
 };
 
 template< class T1 >
-class VAO<T1> : VAO {
+class VAO<T1> : public VAO {
+private:
+    VBO<T1>* _buffer1;
 public:
-    VAO(VBO<T1> Buffer1);
-    ~VAO();
+    VAO(VBO<T1>* Buffer1);
+    virtual ~VAO();
+};
+
+template< class T1, class T2 >
+class VAO<T1, T2> : public VAO<T1> {
+private:
+    VBO<T2>* _buffer2;
+public:
+    VAO(VBO<T1>* Buffer1, VBO<T1>* Buffer2);
+    virtual ~VAO();
+};
+
+template< class T1, class T2, class T3 >
+class VAO<T1, T2, T3> : public VAO<T1, T2> {
+private:
+    VBO<T3>* _buffer3;
+public:
+    VAO(VBO<T1>* Buffer1, VBO<T2>* Buffer2, VBO<T3>* Buffer3);
+    virtual ~VAO();
 };
 #endif //GLRAYTRACING_VAO_H
