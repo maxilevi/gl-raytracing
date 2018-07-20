@@ -48,15 +48,15 @@ int main(void)
 		return -1;
 	}
 
-	Renderer* renderer = new Renderer();
+	auto * rend = new Renderer();
     while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
-		renderer->Draw();
+		rend->Draw();
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-	delete renderer;
+	delete rend;
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	exit(EXIT_SUCCESS);

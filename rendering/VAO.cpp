@@ -7,10 +7,10 @@
 template <class T1, class T2, class T3>
 VAO<T1, T2, T3>::VAO(VBO<T1>* Buffer1, VBO<T2>* Buffer2, VBO<T3>* Buffer3) : VAO<T1, T2>::VAO(Buffer1, Buffer2)
 {
-    VAO<T1, T2>::Bind();
+    glBindVertexArray(this->_id);
     this->_buffer3 = Buffer3;
     glVertexAttribPointer(1, this->_buffer3->getSize(), this->_buffer3->getPointerType(), GL_FALSE, 0, 0);
-    VAO<T1, T2>::Unbind();
+    glBindVertexArray(0);
 }
 
 template <class T1, class T2, class T3>
@@ -23,10 +23,10 @@ VAO<T1, T2, T3>::~VAO()
 template <class T1, class T2>
 VAO<T1, T2>::VAO(VBO<T1>* Buffer1, VBO<T2>* Buffer2) : VAO<T1>::VAO(Buffer1)
 {
-    VAO<T1>::Bind();
+    glBindVertexArray(this->_id);
     this->_buffer2 = Buffer2;
     glVertexAttribPointer(1, this->_buffer2->getSize(), this->_buffer2->getPointerType(), GL_FALSE, 0, 0);
-    VAO<T1>::Unbind();
+    glBindVertexArray(0);
 }
 
 template <class T1, class T2>
@@ -36,11 +36,10 @@ VAO<T1, T2>::~VAO()
     delete *(this->_buffer2);
 }
 
-using VAO::Bind;
 template <class T1>
 VAO<T1>::VAO(VBO<T1>* Buffer1) : VAO()
 {
-    VAO::Bind();
+    this->
     this->_buffer1 = Buffer1;
     glVertexAttribPointer(0, this->_buffer1->getSize(), this->_buffer1->getPointerType(), GL_FALSE, 0, 0);
     VAO::Unbind();
