@@ -5,19 +5,19 @@
 #include "VBO.h"
 
 template <class T>
-VBO::VBO(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type, GLenum target, GLenum hint)
+VBO<T>::VBO(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type, GLenum target, GLenum hint)
 {
     this->Initialize(data, size_in_bytes, size, pointer_type, target, hint);
 };
 
 template <class T>
-VBO::VBO(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type)
+VBO<T>::VBO(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type)
 {
     this->Initialize(data, size_in_bytes, size, pointer_type, GL_ARRAY_BUFFER, GL_STATIC_DRAW);
 };
 
 template <class T>
-void VBO::Initialize(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type, GLenum target, GLenum hint)
+void VBO<T>::Initialize(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum pointer_type, GLenum target, GLenum hint)
 {
     this->_hint = hint;
     this->_target = target;
@@ -28,27 +28,27 @@ void VBO::Initialize(T* data, GLsizeiptr size_in_bytes, GLint size, GLenum point
     glBufferData(this->_target, this->_sizeInBytes, data, this->_hint);
 };
 
-VBO::~VBO()
+BaseVBO::~BaseVBO()
 {
     glDeleteBuffers(1, &this->_id);
 }
 
-const void VBO::Bind()
+const void BaseVBO::bind()
 {
     glBindBuffer(this->_target, this->_id);
 }
 
-const void VBO::Unbind()
+const void BaseVBO::unbind()
 {
     glBindBuffer(this->_target, 0);
 }
 
-GLenum VBO::getPointerType()
+GLenum BaseVBO::getPointerType()
 {
     return this->_pointerType;
 };
 
-GLint VBO::getSize()
+GLint BaseVBO::getSize()
 {
     return this->_size;
 };
