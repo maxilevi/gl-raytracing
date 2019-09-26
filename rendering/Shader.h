@@ -13,11 +13,9 @@ class Shader {
 private:
     GLuint _id;
     explicit Shader(GLuint id);
-    static GLuint CompileShader(const std::string* source, GLenum type);
-    static GLuint CreateProgram(GLuint vertex_shader_id, GLuint fragment_shader_id);
 
 public:
-    static Shader* Build(const std::string* vertex_shader, const std::string* fragment_shader);
+    static Shader* Build(const char* vertex_shader, const char* fragment_shader);
     void Bind() const;
     void Unbind() const;
     ~Shader();

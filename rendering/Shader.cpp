@@ -10,18 +10,11 @@ Shader::Shader(GLuint id)
     this->_id = id;
 };
 
-static Shader* Shader::Build(const std::string* vertex_shader, const std::string* fragment_shader)
-{
-    GLuint vertex_id = Shader::CompileShader(vertex_shader, GL_VERTEX_SHADER);
-    GLuint fragment_id = Shader::CompileShader(fragment_shader, GL_FRAGMENT_SHADER);
-    return new Shader(Shader::CreateProgram(vertex_id, fragment_id));
-};
-
-static GLuint Shader::CompileShader(const std::string* source, GLenum type)
+static GLuint CompileShader(const char* source, GLenum type)
 {
     GLuint id = glCreateShader(type);
-    const GLchar* as_char_array = source->c_str();
-    glShaderSource(id, 1, &as_char_array, NULL);
+    const GLchar* as_char_array = source;
+    glShaderSource(id, 1, &as_char_array, nullptr);
     glCompileShader(id);
     GLint compilation_result = -1;
     glGetShaderiv(id, GL_COMPILE_STATUS, &compilation_result);
@@ -30,12 +23,13 @@ static GLuint Shader::CompileShader(const std::string* source, GLenum type)
     glGetShaderInfoLog(id, size, nullptr, p);
     std::cout << (compilation_result == -1 ? "[OK]" : "[FAIL]") << "Compiled " << type << " shader " << id << std::endl;
     if(compilation_result != -1) {
-        std::cout << log << std::endl;
+        std::cout << p << std::endl;
     }
     delete[] p;
+	return id;
 }
 
-static GLuint Shader::CreateProgram(GLuint vertex_shader_id, GLuint fragment_shader_id)
+static GLuint CreateProgram(GLuint vertex_shader_id, GLuint fragment_shader_id)
 {
     GLuint programId = glCreateProgram();
     glAttachShader(programId, vertex_shader_id);
@@ -47,6 +41,14 @@ static GLuint Shader::CreateProgram(GLuint vertex_shader_id, GLuint fragment_sha
     glDeleteShader(fragment_shader_id);
     return programId;
 }
+
+Shader* Shader::Build(const char* vertex_shader, const char* fragment_shader)
+{
+	GLuint vertex_id = CompileShader(vertex_shader, GL_VERTEX_SHADER);
+	GLuint fragment_id = CompileShader(fragment_shader, GL_FRAGMENT_SHADER);
+	Shader* shader = new Shader(CreateProgram(vertex_id, fragment_id));
+	return shader;
+};
 
 void Shader::Bind() const
 {
