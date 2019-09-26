@@ -9,7 +9,7 @@
 
 class IO {
 public:
-    static const std::string* ReadString(std::string path);
+    static const char* IO::ReadString(const char* path);
 
 private:
     IO();

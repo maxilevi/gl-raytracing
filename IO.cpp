@@ -12,16 +12,15 @@ IO::IO(){
 
 };
 
-const std::string* IO::ReadString(std::string path)
+const char* IO::ReadString(const char* path)
 {
     std::ifstream in(path);
     if(in) {
         std::ostringstream contents;
         contents << in.rdbuf();
         in.close();
-        std::string* str = new std::string(contents.str());
-        return str;
+        return contents.str().c_str();
     }
     std::cerr << "could not open file stream";
-    return nullptr;
+    return NULL;
 };
